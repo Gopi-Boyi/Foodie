@@ -1,5 +1,5 @@
-import logo from './logo10.png';
-import cart from './cart10.png';
+import logo10 from './logo10.png';
+import cart10 from './cart10.png';
 
 export const assets = {
     logo10,
