@@ -27,20 +27,23 @@ public class FoodServiceImpl implements FoodService
     private final S3Client s3Client;
     private final FoodRepository foodRepository;
     private final String bucketName;
+    private final String region;
 
     public FoodServiceImpl(
             S3Client s3Client,
             FoodRepository foodRepository,
-            @Value("${aws.s3.bucketname}") String bucketName) {
+            @Value("${aws.s3.bucketname}") String bucketName,
+            @Value("${aws.region}") String region){
 
         this.s3Client = s3Client;
         this.foodRepository = foodRepository;
         this.bucketName = bucketName;
+        this.region = region;
     }
 
     @Override
     public String uploadFile(MultipartFile file) {
-       String filenameExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+        String filenameExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
         String key = UUID.randomUUID().toString()+"."+filenameExtension;
         try {
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
@@ -51,14 +54,13 @@ public class FoodServiceImpl implements FoodService
                     .build();
             PutObjectResponse response = s3Client.putObject(putObjectRequest, RequestBody.fromBytes(file.getBytes()));
             if(response.sdkHttpResponse().isSuccessful()){
-                return "https://"+bucketName+".s3.amazonaws.com/"+key;
+                return "https://"+bucketName+".s3."+region+".amazonaws.com/"+key;   // ✅ region added
             }else{
                 throw  new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
             }
         }catch (IOException ex){
-                throw  new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, " An error occured while uploading the file");
+            throw  new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, " An error occured while uploading the file");
         }
-
     }
 
     @Override
