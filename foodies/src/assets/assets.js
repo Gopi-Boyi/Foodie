@@ -2,11 +2,11 @@ import logo10 from './logo10.png';
 import cart10 from './cart10.png';
 
 import briyani from './briyani.png';
-import burger from './burger.png';
+import buger from './burger.png';
 import cake from './cake.png';
 import icecream from './icecream.png';
 import pizza from './pizza.png';
-import rools from './rools.png';
+import rolls from './rools.png';
 import salad from './salad.png';
 
 export const assets = {
@@ -20,15 +20,15 @@ export const categories = [
         icons: briyani
     },
     {
-        category: 'Burger',
-        icons: burger
+        category: 'Buger',
+        icons: buger
     },
     {
-        category: 'Cakes',
+        category: 'Cake',
         icons: cake
     },
     {
-        category: 'Ice Creams',
+        category: 'Ice cream',
         icons: icecream
     },
     {
@@ -36,8 +36,8 @@ export const categories = [
         icons: pizza
     },
     {
-        category: 'Rools',
-        icons: rools
+        category: 'Rolls',
+        icons: rolls
     },
     {
         category: 'Salad',
