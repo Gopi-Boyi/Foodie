@@ -25,10 +25,12 @@ const Menubar = () => {
        
       </ul>
       <div className='d-flex align-item-center gap-4'>
+        <Link to={`/cart`}>
         <div className='postion-relative'>
           <img src={assets.cart10} alt="" height={48} width={48} className='position-relative'/>
           <span className='position-flex top-0 start-100 translate-middle badge rounded-pill bg-warning'>5</span>
         </div>
+        </Link>
         <button className='btn btn-outline-primary'>Login</button>
         <button className='btn btn-outline-primary'>Register</button>
 

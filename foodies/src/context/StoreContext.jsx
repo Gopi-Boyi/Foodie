@@ -12,8 +12,22 @@ export const StoreContextProvider = (props) => {
         setFoodList(response.data);
     }
 
+    const[quantities, setQuantities] = useState({});
+
+    const increaseQty = (foodId) => {
+        setQuantities((prev) => ({...prev, [foodId]: (prev[foodId] || 0)+1}));
+    }
+
+    const decreaseQty = (foodId) => {
+        setQuantities((prev) => ({...prev, [foodId]: prev[foodId] > 0 ? prev[foodId]-1:0}));
+    }
+
     const contextValue = {
-        foodList
+        foodList,
+        increaseQty,
+        decreaseQty,
+        quantities
+
     };
 
      useEffect(() => {
