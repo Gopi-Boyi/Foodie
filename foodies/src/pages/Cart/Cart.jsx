@@ -2,8 +2,11 @@ import React, { useContext } from 'react'
 import './Cart.css'
 
 import { StoreContext } from '../../context/StoreContext'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Cart = () => {
+
+    const navigate =  useNavigate();
+
     const {foodList, increaseQty, decreaseQty, quantities, removeFromCart} = useContext(StoreContext);
     //cart items
     const cartItems = foodList.filter(food => quantities[food.id]> 0);
@@ -88,7 +91,8 @@ const Cart = () => {
                         <strong>&#8377;{subtotal === 0? 0.0 : total.toFixed(2)}</strong>
                     </div>
                     <button className="btn btn-primary w-100"
-                    disabled={cartItems.length === 0}>Proceed to Checkout</button>
+                    disabled={cartItems.length === 0} onClick={() => navigate("/order")}>
+                        Proceed to Checkout</button>
                 </div>
             </div>
            
